@@ -1,8 +1,8 @@
-function head(array) {
+const head = function(array) {
 
   return array[0];
 
-}
+};
 
 // FUNCTION IMPLEMENTATION
 const assertEqual = function(actual, expected) {
