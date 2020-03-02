@@ -16,15 +16,15 @@ const assertEqual = function(actual, expected) {
 };
 
 // TEST CODE
-console.log([1, 2, 3]);
-console.log([123]);
-console.log([]);
+console.log(tail([1, 2, 3]));
+console.log(tail([123]));
+console.log(tail([]));
 
 const result = tail(["Hello", "Lighthouse", "Labs"]);
 console.log(result);
 assertEqual(result, ["Lighthouse", "Labs"]); // => will always fail!
 
-// Test Case: Check the original array 
+// Test Case: Check the original array
 const words = ["Yo Yo", "Lighthouse", "Labs"];
 tail(words); // no need to capture the return value since we are not checking it
 assertEqual(words.length, 3); // original array should still have 3 elements!
