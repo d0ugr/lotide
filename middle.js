@@ -24,14 +24,14 @@ const assertArraysEqual = function(actual, expected) {
 const middle = function(array) {
 
   let midIndex = Math.floor(array.length / 2);
-  let result   = [];
+  let result;
 
-  if (array.length >= 3) {
-    if (array.length % 2 === 0) {
-      result = array.slice(midIndex - 1, midIndex + 1);
-    } else {
-      result.push(array[midIndex]);
-    }
+  if (array.length < 3) {
+    result = [];
+  } else if (array.length % 2 === 0) {
+    result = array.slice(midIndex - 1, midIndex + 1);
+  } else {
+    result = array.slice(midIndex, midIndex);
   }
 
   return result;
@@ -45,6 +45,8 @@ assertArraysEqual(middle([1, 2, 3]), [2]);
 assertArraysEqual(middle([1, 2, 3, 4]), [2, 3]);
 assertArraysEqual(middle([1, 2, 3, 4, 5]), [3]);
 assertArraysEqual(middle([1, 2, 3, 4, 5, 6]), [3, 4]);
+assertArraysEqual(middle(["test"]), []);
+assertArraysEqual(middle(["test", "blah"]), []);
 assertArraysEqual(middle(["test", "blah", "blarg"]), ["blah"]);
 assertArraysEqual(middle(["test", "blah", "blarg", "everything is fine"]), ["blah", "blarg"]);
 assertArraysEqual(middle(["test", "blah", "blarg", "everything", "is", "fine"]), ["blarg", "everything"]);
