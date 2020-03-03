@@ -39,4 +39,20 @@ const flatten = function(array) {
 
 };
 
-console.log(flatten([1, 2, 3, [4, 5, 6], 7, 8, 9]));
+assertArraysEqual(flatten([]), []);
+assertArraysEqual(flatten([1]), [1]);
+assertArraysEqual(flatten([[1]]), [1]);
+assertArraysEqual(flatten([1, 2]), [1, 2]);
+assertArraysEqual(flatten([[1, 2]]), [1, 2]);
+assertArraysEqual(flatten([[1, 2], 3]), [1, 2, 3]);
+assertArraysEqual(flatten(["1"]), ["1"]);
+assertArraysEqual(flatten([["1"]]), ["1"]);
+assertArraysEqual(flatten(["1", "2"]), ["1", "2"]);
+assertArraysEqual(flatten([["1", "2"]]), ["1", "2"]);
+assertArraysEqual(flatten([["1", "2"], "3"]), ["1", "2", "3"]);
+assertArraysEqual(flatten([1, 2, [3, 4], 5, [6]]), [1, 2, 3, 4, 5, 6]);
+assertArraysEqual(flatten([1, 2, 3, [4, 5, 6], 7, 8, 9]), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+assertArraysEqual(flatten([1, "2", 3, [4, "5", "6"], 7, "8", 9]), [1, "2", 3, 4, "5", "6", 7, "8", 9]);
+// Expected failure:
+assertArraysEqual(flatten([1, 2, [3, [4, 5], 6], 7, 8, 9]), [1, 2, 3, [4, 5], 6, 7, 8, 9]);
+assertArraysEqual(flatten([1, [2, [3, [4, 5], 6], 7, 8], 9]), [1, 2, [3, [4, 5], 6], 7, 8, 9]);
