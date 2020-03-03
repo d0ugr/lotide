@@ -35,5 +35,19 @@ const without = function(source, itemsToRemove) {
 
 };
 
-console.log(without([1, 2, 3], [1])); // => [2, 3]
-console.log(without(["1", "2", "3"], [1, 2, "3"])); // => ["1", "2"]
+assertArraysEqual(without([], []), []);
+assertArraysEqual(without([1], [1]), []);
+assertArraysEqual(without([1, 2, 3], [1]), [2, 3]);
+assertArraysEqual(without([1, 2, 3], [1, 2, 3]), []);
+assertArraysEqual(without([1, 1, 1, 2, 2, 3, 3], [1, 2, 3]), []);
+assertArraysEqual(without([1, 1, 1, 2, 2, 3, 3, 4, 4], [1, 2, 3]), [4, 4]);
+
+assertArraysEqual(without(["1"], [1]), ["1"]);
+assertArraysEqual(without(["1", "2", "3"], [1, 2, "3"]), ["1", "2"]);
+assertArraysEqual(without(["1", "1", 1, "2", 2, 3, 3, "4", "4"], [1, 2, 3]), ["1", "1", "2", "4", "4"]);
+assertArraysEqual(without(["1", "1", 1, "2", 2, 3, 3, "4", "4"], ["1", 2, 3]), [1, "2", "4", "4"]);
+assertArraysEqual(without(["1", "1", 1, "2", 2, 3, 3, "4", "4"], ["1", 2, "3"]), [1, "2", 3, 3, "4", "4"]);
+
+// Expected failures:
+assertArraysEqual(without([[], [], []], [1]), [[], [], []]);
+assertArraysEqual(without([[], [], []], [[]]), []);
