@@ -23,12 +23,22 @@ const assertArraysEqual = function(actual, expected) {
 
 const middle = function(array) {
 
-  let result = [];
+  let midIndex = Math.floor(array.length / 2);
+  let result   = [];
 
-  result.push(array[Math.floor(array.length / 2)]);
+  if (array.length >= 3) {
+    if (array.length % 2 === 0) {
+      result = array.slice(midIndex - 1, midIndex + 1);
+    } else {
+      result.push(array[midIndex]);
+    }
+  }
 
   return result;
 
 };
 
-console.log(middle([1, 2, 3]));
+assertArraysEqual(middle([]), []);
+assertArraysEqual(middle([1]), []);
+assertArraysEqual(middle([1, 2]), []);
+assertArraysEqual(middle([1, 2, 3]), [2]);
