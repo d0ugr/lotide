@@ -21,4 +21,25 @@ const eqArrays = function(array1, array2) {
 
 };
 
+assertEqual(eqArrays([], []), true);
+assertEqual(eqArrays([1], [1]), true);
 assertEqual(eqArrays([1, 2, 3], [1, 2, 3]), true);
+
+assertEqual(eqArrays([], [1]), false);
+assertEqual(eqArrays([1], []), false);
+assertEqual(eqArrays([1], ["1"]), false);
+assertEqual(eqArrays([], [1, 2, 3]), false);
+assertEqual(eqArrays([1], [1, 2, 3]), false);
+assertEqual(eqArrays([1, 2], [1, 2, 3]), false);
+assertEqual(eqArrays([1, 2, 3], ["1", "2", "3"]), false);
+assertEqual(eqArrays([1, 2, 3], [1, 2, "3"]), false);
+assertEqual(eqArrays([], [[]]), false);
+assertEqual(eqArrays([[]], [[]]), false);
+assertEqual(eqArrays([[]], [[], []]), false);
+assertEqual(eqArrays([1], [[]]), false);
+assertEqual(eqArrays([1], [[], []]), false);
+assertEqual(eqArrays([1, 2], [[], []]), false);
+assertEqual(eqArrays([], [{}]), false);
+assertEqual(eqArrays([{}], []), false);
+assertEqual(eqArrays([{}], [{}]), false);
+assertEqual(eqArrays([{}], [{}, {}]), false);
