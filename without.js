@@ -21,17 +21,18 @@ const assertArraysEqual = function(actual, expected) {
 
 };
 
-const without = funciton(source, itemsToRemove) {
+const without = function(source, itemsToRemove) {
 
   let result = [];
 
   for (i = 0; i < source.length; i++) {
-    for (j = 0; j < itemsToRemove.length; j++) {
-
+    if (itemsToRemove.indexOf(source[i]) === -1) {
+      result.push(source[i]);
     }
   }
 
   return result;
+
 };
 
 console.log(without([1, 2, 3], [1])); // => [2, 3]
