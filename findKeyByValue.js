@@ -9,14 +9,19 @@ const assertEqual = function(actual, expected) {
 
 };
 
-const findKeyByValue = function(value) {
+const findKeyByValue = function(searchObject, findValue) {
 
-
+  for (const key in searchObject) {
+    if (searchObject[key] === findValue) {
+      return key;
+    }
+  }
 
 };
 
 const bestTVShowsByGenre = {
-  sci_fi: "The Expanse",
+  // eslint complains about sci_fi:
+  sciFi:  "The Expanse",
   comedy: "Brooklyn Nine-Nine",
   drama:  "The Wire"
 };
