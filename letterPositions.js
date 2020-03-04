@@ -25,7 +25,11 @@ const letterPositions = function(sentence) {
 
   const results = {};
 
-  // logic to update results here
+  for (index in sentence) {
+    if (!results[sentence[index]]) {
+      results[sentence[index]] = [];
+    }
+  }
 
   return results;
 
