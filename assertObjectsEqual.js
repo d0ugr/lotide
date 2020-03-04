@@ -30,6 +30,13 @@ const eqObjects = function(object1, object2) {
 
 // FUNCTION IMPLEMENTATION
 const assertObjectsEqual = function(actual, expected) {
-  // Implement me!
+
+  // +++ and --- used for fonts without emojis:
+  if (eqObjects(actual, expected)) {
+    console.log(`✅✅✅ +++ Assertion Passed: ${actual} === ${expected}`);
+  } else {
+    console.log(`🛑🛑🛑 --- Assertion Failed: ${actual} !== ${expected}`);
+  }
+
 };
 
