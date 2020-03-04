@@ -54,3 +54,11 @@ assertEqual(eqObjects(cd, dc), true);
 
 const cd2 = { c: "1", d: ["2", 3, 4] };
 assertEqual(eqObjects(cd, cd2), false);
+
+assertEqual(eqObjects({}, {}), true);
+assertEqual(eqObjects({ a: 1, b: [] }, { a: 1, b: [] }), true);
+
+assertEqual(eqObjects({ a: [], b: [] }, { a: 1, b: [] }), false);
+assertEqual(eqObjects({ a: 1, b: [] }, { a: [], b: [] }), false);
+assertEqual(eqObjects({ a: [1], b: [] }, { a: 1, b: [] }), false);
+assertEqual(eqObjects({ a: [], b: [] }, { a: 1, b: [1] }), false);
