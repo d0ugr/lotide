@@ -31,11 +31,13 @@ const eqObjects = function(object1, object2) {
 // FUNCTION IMPLEMENTATION
 const assertObjectsEqual = function(actual, expected) {
 
+  const inspect = require("util").inspect;
+
   // +++ and --- used for fonts without emojis:
   if (eqObjects(actual, expected)) {
-    console.log(`✅✅✅ +++ Assertion Passed: ${actual} === ${expected}`);
+    console.log(`✅✅✅ +++ Assertion Passed: ${inspect(actual)} === ${inspect(expected)}`);
   } else {
-    console.log(`🛑🛑🛑 --- Assertion Failed: ${actual} !== ${expected}`);
+    console.log(`🛑🛑🛑 --- Assertion Failed: ${inspect(actual)} !== ${inspect(expected)}`);
   }
 
 };
