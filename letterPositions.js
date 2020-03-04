@@ -23,13 +23,14 @@ const assertArraysEqual = function(actual, expected) {
 
 const letterPositions = function(sentence) {
 
+  const sentenceNoSpaces = sentence.replace(/ /g, "");
   const results = {};
 
-  for (index in sentence) {
-    if (!results[sentence[index]]) {
-      results[sentence[index]] = [index];
+  for (index in sentenceNoSpaces) {
+    if (!results[sentenceNoSpaces[index]]) {
+      results[sentenceNoSpaces[index]] = [index];
     } else {
-      results[sentence[index]].push(index);
+      results[sentenceNoSpaces[index]].push(index);
     }
   }
 
@@ -38,3 +39,4 @@ const letterPositions = function(sentence) {
 };
 
 console.log(letterPositions("hello"));
+console.log(letterPositions("lighthouse in the house"));
