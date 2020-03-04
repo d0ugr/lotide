@@ -1,3 +1,14 @@
+const assertEqual = function(actual, expected) {
+
+  // +++ and --- used for fonts without emojis:
+  if (actual === expected) {
+    console.log(`✅✅✅ +++ Assertion Passed: ${actual} === ${expected}`);
+  } else {
+    console.log(`🛑🛑🛑 --- Assertion Failed: ${actual} !== ${expected}`);
+  }
+
+};
+
 const eqArrays = function(array1, array2) {
 
   if (array1.length !== array2.length) return false;
@@ -45,6 +56,7 @@ let result;
 
 result = letterPositions("hello");
 console.log(result);
+assertEqual(result[" "], undefined);
 assertArraysEqual(result.h, [0]);
 assertArraysEqual(result.e, [1]);
 assertArraysEqual(result.l, [2, 3]);
@@ -52,6 +64,7 @@ assertArraysEqual(result.o, [4]);
 
 result = letterPositions("lighthouse in the house");
 console.log(result);
+assertEqual(result[" "], undefined);
 assertArraysEqual(result.l, [0]);
 assertArraysEqual(result.i, [1, 11]);
 assertArraysEqual(result.g, [2]);
