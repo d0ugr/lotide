@@ -25,4 +25,8 @@ const countLetters = function(inString) {
 
 };
 
-console.log(countLetters("lighthouse in the house"));
+const testString = "lighthouse in the house";
+console.log(countLetters(testString));
+console.log(testString);
+
+console.log(countLetters("Word to Snuffy"));
