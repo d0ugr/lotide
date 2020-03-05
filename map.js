@@ -38,6 +38,16 @@ const map = function(array, callback) {
 
 };
 
-const results1 = map(words, word => word[0]);
-console.log(results1);
-assertArraysEqual(results1, ["g", "c", "t", "m", "t"]);
+let results;
+
+results = map(words, word => word[0]);
+console.log(results);
+assertArraysEqual(results, ["g", "c", "t", "m", "t"]);
+
+results = map(words, word => word.length);
+console.log(results);
+assertArraysEqual(results, [6, 7, 2, 5, 3]);
+
+results = map(words, word => "NOPE");
+console.log(results);
+assertArraysEqual(results, ["NOPE", "NOPE", "NOPE", "NOPE", "NOPE"]);
