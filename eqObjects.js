@@ -32,7 +32,7 @@ const eqObjects = function(object1, object2) {
         if (typeof object1[key] !== "object" && typeof object2[key] !== "object") {
           if (object1[key] !== object2[key]) return false;
         } else {
-          return eqObjects(object1[key], object2[key]);
+          if (!eqObjects(object1[key], object2[key])) return false;
         }
       } else {
         if (!eqArrays(object1[key], object2[key])) return false;
@@ -71,8 +71,10 @@ assertEqual(eqObjects({ a: [], b: [] }, { a: 1, b: [1] }), false);
 console.log("W01D5 - Recursive eqObjects");
 
 assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true);
+assertEqual(eqObjects({ a: { z: 1 }, b: { y: 2 }, c: { x: 3 } }, { a: { z: 1 }, b: { y: 2 }, c: { x: 3 } }), true);
 assertEqual(eqObjects({ a: { z: 1, y: { x: 3 } }, b: 2 }, { a: { z: 1, y: { x: 3 } }, b: 2 }), true);
 assertEqual(eqObjects({ a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2 }, { a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2 }), true);
+assertEqual(eqObjects({ a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2, c: { u: 5 } }, { a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2, c: { u: 5 } }), true);
 
 assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, {}), false);
 assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: {} }), false);
