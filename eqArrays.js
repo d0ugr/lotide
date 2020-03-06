@@ -44,3 +44,10 @@ assertEqual(eqArrays([], [{}]), false);
 assertEqual(eqArrays([{}], []), false);
 assertEqual(eqArrays([{}], [{}]), false);
 assertEqual(eqArrays([{}], [{}, {}]), false);
+
+console.log("W01D5 - Recursive eqArrays");
+
+assertEqual(eqArrays([[2, 3], [4]], [[2, 3], [4]]), true);
+
+assertEqual(eqArrays([[2, 3], [4]], [[2, 3], [4, 5]), false);
+assertEqual(eqArrays([[2, 3], [4]], [[2, 3], 4]), false);
