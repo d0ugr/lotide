@@ -67,6 +67,8 @@ assertEqual(eqObjects({ a: [], b: [] }, { a: 1, b: [1] }), false);
 console.log("W01D5 - Recursive eqObjects");
 
 assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true);
+assertEqual(eqObjects({ a: { z: 1, y: { x: 3 } }, b: 2 }, { a: { z: 1, y: { x: 3 } }, b: 2 }), true);
+assertEqual(eqObjects({ a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2 }, { a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2 }), true);
 
 assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false);
 assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false);
