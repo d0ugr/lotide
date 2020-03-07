@@ -15,27 +15,29 @@ const eqArrays = function(array1, array2) {
   if (array1.length !== array2.length) return false;
 
   for (let i = 0; i < array1.length; i++) {
-    if (array1[i] !== array2[i]) return false;
+    if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
+      if (!eqArrays(array1[i], array2[i])) return false;
+    } else if (typeof array1[i] === "object" && typeof array2[i] === "object") {
+      if (!eqObjects(array1[i], array2[i])) return false;
+    } else {
+      if (array1[i] !== array2[i]) return false;
+    }
   }
 
   return true;
 
 };
 
-// Returns true if both objects have identical keys with identical values.
-// Otherwise you get back a big fat false!
 const eqObjects = function(object1, object2) {
 
   if (Object.keys(object1).length === Object.keys(object2).length) {
     for (const key in object1) {
-      if (!Array.isArray(object1[key]) && !Array.isArray(object2[key])) {
-        if (typeof object1[key] !== "object" && typeof object2[key] !== "object") {
-          if (object1[key] !== object2[key]) return false;
-        } else {
-          if (!eqObjects(object1[key], object2[key])) return false;
-        }
-      } else {
+      if (Array.isArray(object1[key]) && Array.isArray(object2[key])) {
         if (!eqArrays(object1[key], object2[key])) return false;
+      } else if (typeof object1[key] === "object" && typeof object2[key] === "object") {
+        if (!eqObjects(object1[key], object2[key])) return false;
+      } else {
+        if (object1[key] !== object2[key]) return false;
       }
     }
   } else {
@@ -75,6 +77,16 @@ assertEqual(eqObjects({ a: { z: 1 }, b: { y: 2 }, c: { x: 3 } }, { a: { z: 1 }, 
 assertEqual(eqObjects({ a: { z: 1, y: { x: 3 } }, b: 2 }, { a: { z: 1, y: { x: 3 } }, b: 2 }), true);
 assertEqual(eqObjects({ a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2 }, { a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2 }), true);
 assertEqual(eqObjects({ a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2, c: { u: 5 } }, { a: { z: 1, y: { x: 3, w: { v: 4 } } }, b: 2, c: { u: 5 } }), true);
+
+assertEqual(eqObjects({ a: { z: [] }, b: 2 }, { a: { z: [] }, b: 2 }), true);
+assertEqual(eqObjects({ a: { z: 1 }, b: { y: [] }, c: { x: 3 } }, { a: { z: 1 }, b: { y: [] }, c: { x: 3 } }), true);
+assertEqual(eqObjects({ a: { z: 1, y: { x: [] } }, b: 2 }, { a: { z: 1, y: { x: [] } }, b: 2 }), true);
+assertEqual(eqObjects({ a: { z: [], y: { x: 3, w: { v: 4 } } }, b: [] }, { a: { z: [], y: { x: 3, w: { v: 4 } } }, b: [] }), true);
+assertEqual(eqObjects({ a: { z: 1, y: { x: 3, w: { v: [] } } }, b: 2, c: { u: [] } }, { a: { z: 1, y: { x: 3, w: { v: [] } } }, b: 2, c: { u: [] } }), true);
+assertEqual(eqObjects({ a: { z: 1, y: [{ x: 3, w: { v: [] } }] }, b: 2, c: { u: [] } }, { a: { z: 1, y: [{ x: 3, w: { v: [] } }] }, b: 2, c: { u: [] } }), true);
+assertEqual(eqObjects({ a: { z: 1, y: [[[[{ x: 3, w: { v: [] } }]]]] }, b: 2, c: { u: [] } }, { a: { z: 1, y: [[[[{ x: 3, w: { v: [] } }]]]] }, b: 2, c: { u: [] } }), true);
+assertEqual(eqObjects({ a: { z: 1, y: [[[[{ x: 3, w: { v: [1, 2, 3] } }]]]] }, b: 2, c: { u: [4, 5, 6] } }, { a: { z: 1, y: [[[[{ x: 3, w: { v: [1, 2, 3] } }]]]] }, b: 2, c: { u: [4, 5, 6] } }), true);
+assertEqual(eqObjects({ a: { z: 1, y: [[[[{ x: 3, w: { v: ["1", "2", "3"] } }]]]] }, b: 2, c: { u: [4, "5", 6] } }, { a: { z: 1, y: [[[[{ x: 3, w: { v: ["1", "2", "3"] } }]]]] }, b: 2, c: { u: [4, "5", 6] } }), true);
 
 assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, {}), false);
 assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: {} }), false);
