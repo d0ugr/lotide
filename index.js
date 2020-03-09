@@ -5,5 +5,6 @@ const middle = require("./middle");
 module.exports = {
   head,
   tail,
-  middle
+  middle,
+  flatten
 };
