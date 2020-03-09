@@ -7,5 +7,6 @@ module.exports = {
   tail,
   middle,
   flatten,
-  letterPositions
+  letterPositions,
+  countOnly
 };
