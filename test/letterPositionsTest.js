@@ -28,7 +28,6 @@ describe("#letterPositions", () => {
 
   result = letterPositions("lighthouse in the house");
 
-  console.log(result);
   it("result[\" \"] -> undefined", () => {
     assert.isUndefined(result[" "]);
   });

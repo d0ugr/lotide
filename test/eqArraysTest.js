@@ -1,43 +1,115 @@
-const assertEqual = require("../assertEqual");
-const eqArrays    = require("../eqArrays");
+const assert   = require("chai").assert;
+const eqArrays = require("../eqArrays");
 
-assertEqual(eqArrays([], []), true);
-assertEqual(eqArrays([[]], [[]]), true);
-assertEqual(eqArrays([[[]]], [[[]]]), true);
-assertEqual(eqArrays([1], [1]), true);
-assertEqual(eqArrays([1, 2, 3], [1, 2, 3]), true);
+describe("#eqArrays", () => {
 
-assertEqual(eqArrays([], [1]), false);
-assertEqual(eqArrays([1], []), false);
-assertEqual(eqArrays([1], ["1"]), false);
-assertEqual(eqArrays([], [1, 2, 3]), false);
-assertEqual(eqArrays([1], [1, 2, 3]), false);
-assertEqual(eqArrays([1, 2], [1, 2, 3]), false);
-assertEqual(eqArrays([1, 2, 3], ["1", "2", "3"]), false);
-assertEqual(eqArrays([1, 2, 3], [1, 2, "3"]), false);
-assertEqual(eqArrays([], [[]]), false);
-assertEqual(eqArrays([[]], [[], []]), false);
-assertEqual(eqArrays([1], [[]]), false);
-assertEqual(eqArrays([1], [[], []]), false);
-assertEqual(eqArrays([1, 2], [[], []]), false);
-assertEqual(eqArrays([], [{}]), false);
-assertEqual(eqArrays([{}], []), false);
-assertEqual(eqArrays([{}], [{}]), false);
-assertEqual(eqArrays([{}], [{}, {}]), false);
+  it("[], []", () => {
+    assert.isTrue(eqArrays([], []));
+  });
+  it("[[]], [[]]", () => {
+    assert.isTrue(eqArrays([[]], [[]]));
+  });
+  it("[[[]]], [[[]]]", () => {
+    assert.isTrue(eqArrays([[[]]], [[[]]]));
+  });
+  it("[1], [1]", () => {
+    assert.isTrue(eqArrays([1], [1]));
+  });
+  it("[1, 2, 3], [1, 2, 3]", () => {
+    assert.isTrue(eqArrays([1, 2, 3], [1, 2, 3]));
+  });
 
-console.log("W01D5 - Recursive eqArrays");
+  it("[], [1]", () => {
+    assert.isFalse(eqArrays([], [1]));
+  });
+  it("[1], []", () => {
+    assert.isFalse(eqArrays([1], []));
+  });
+  it("[1], [\"1\"]", () => {
+    assert.isFalse(eqArrays([1], ["1"]));
+  });
+  it("[], [1, 2, 3]", () => {
+    assert.isFalse(eqArrays([], [1, 2, 3]));
+  });
+  it("[1], [1, 2, 3]", () => {
+    assert.isFalse(eqArrays([1], [1, 2, 3]));
+  });
+  it("[1, 2], [1, 2, 3]", () => {
+    assert.isFalse(eqArrays([1, 2], [1, 2, 3]));
+  });
+  it("[1, 2, 3], [\"1\", \"2\", \"3\"]", () => {
+    assert.isFalse(eqArrays([1, 2, 3], ["1", "2", "3"]));
+  });
+  it("[1, 2, 3], [1, 2, \"3\"]", () => {
+    assert.isFalse(eqArrays([1, 2, 3], [1, 2, "3"]));
+  });
+  it("[], [[]]", () => {
+    assert.isFalse(eqArrays([], [[]]));
+  });
+  it("[[]], [[], []]", () => {
+    assert.isFalse(eqArrays([[]], [[], []]));
+  });
+  it("[1], [[]]", () => {
+    assert.isFalse(eqArrays([1], [[]]));
+  });
+  it("[1], [[], []]", () => {
+    assert.isFalse(eqArrays([1], [[], []]));
+  });
+  it("[1, 2], [[], []]", () => {
+    assert.isFalse(eqArrays([1, 2], [[], []]));
+  });
+  it("[], [{}]", () => {
+    assert.isFalse(eqArrays([], [{}]));
+  });
+  it("[{}], []", () => {
+    assert.isFalse(eqArrays([{}], []));
+  });
+  it("[{}], [{}]", () => {
+    assert.isFalse(eqArrays([{}], [{}]));
+  });
+  it("[{}], [{}, {}]", () => {
+    assert.isFalse(eqArrays([{}], [{}, {}]));
+  });
 
-assertEqual(eqArrays([[[[1]]]], [[[[1]]]]), true);
-assertEqual(eqArrays([[[[1, 2]]]], [[[[1, 2]]]]), true);
-assertEqual(eqArrays([1, [2, 3], [4]], [1, [2, 3], [4]]), true);
-assertEqual(eqArrays([1, [2, 3], [4], [], []], [1, [2, 3], [4], [], []]), true);
-assertEqual(eqArrays([[2, 3], [4]], [[2, 3], [4]]), true);
-assertEqual(eqArrays([[2, 3], [4], [5, [6, [7]]]], [[2, 3], [4], [5, [6, [7]]]]), true);
+  it("[[[[1]]]], [[[[1]]]]", () => {
+    assert.isTrue(eqArrays([[[[1]]]], [[[[1]]]]));
+  });
+  it("[[[[1, 2]]]], [[[[1, 2]]]]", () => {
+    assert.isTrue(eqArrays([[[[1, 2]]]], [[[[1, 2]]]]));
+  });
+  it("[1, [2, 3], [4]], [1, [2, 3], [4]]", () => {
+    assert.isTrue(eqArrays([1, [2, 3], [4]], [1, [2, 3], [4]]));
+  });
+  it("[1, [2, 3], [4], [], []], [1, [2, 3], [4], [], []]", () => {
+    assert.isTrue(eqArrays([1, [2, 3], [4], [], []], [1, [2, 3], [4], [], []]));
+  });
+  it("[[2, 3], [4]], [[2, 3], [4]]", () => {
+    assert.isTrue(eqArrays([[2, 3], [4]], [[2, 3], [4]]));
+  });
+  it("[[2, 3], [4], [5, [6, [7]]]], [[2, 3], [4], [5, [6, [7]]]]", () => {
+    assert.isTrue(eqArrays([[2, 3], [4], [5, [6, [7]]]], [[2, 3], [4], [5, [6, [7]]]]));
+  });
 
-assertEqual(eqArrays([[[[1]]]], [[[1]]]), false);
-assertEqual(eqArrays([[[[1, 2]]]], [[[1, 2]]]), false);
-assertEqual(eqArrays([1, [2, 3], [4]], [1, [2, 3]]), false);
-assertEqual(eqArrays([1, [2, 3], [4], [], []], [1, [2, 3], [4], []]), false);
-assertEqual(eqArrays([[2, 3], [4]], [[2, 3], [4, 5]]), false);
-assertEqual(eqArrays([[2, 3], [4]], [[2, 3], 4]), false);
-assertEqual(eqArrays([[2, 3], [4], [5, [6, [7]]]], [[2, 3], [4], [5, [6]]]), false);
+  it("[[[[1]]]], [[[1]]]", () => {
+    assert.isFalse(eqArrays([[[[1]]]], [[[1]]]));
+  });
+  it("[[[[1, 2]]]], [[[1, 2]]]", () => {
+    assert.isFalse(eqArrays([[[[1, 2]]]], [[[1, 2]]]));
+  });
+  it("[1, [2, 3], [4]], [1, [2, 3]]", () => {
+    assert.isFalse(eqArrays([1, [2, 3], [4]], [1, [2, 3]]));
+  });
+  it("[1, [2, 3], [4], [], []], [1, [2, 3], [4], []]", () => {
+    assert.isFalse(eqArrays([1, [2, 3], [4], [], []], [1, [2, 3], [4], []]));
+  });
+  it("[[2, 3], [4]], [[2, 3], [4, 5]]", () => {
+    assert.isFalse(eqArrays([[2, 3], [4]], [[2, 3], [4, 5]]));
+  });
+  it("[[2, 3], [4]], [[2, 3], 4]", () => {
+    assert.isFalse(eqArrays([[2, 3], [4]], [[2, 3], 4]));
+  });
+  it("[[2, 3], [4], [5, [6, [7]]]], [[2, 3], [4], [5, [6]]]", () => {
+    assert.isFalse(eqArrays([[2, 3], [4], [5, [6, [7]]]], [[2, 3], [4], [5, [6]]]));
+  });
+
+});
