@@ -8,5 +8,7 @@ module.exports = {
   middle,
   flatten,
   letterPositions,
-  countOnly
+  countOnly,
+  findKeyByValue,
+  eqObjects
 };
