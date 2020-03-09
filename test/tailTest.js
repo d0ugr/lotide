@@ -14,16 +14,12 @@ describe("#tail", () => {
     assert.deepEqual(result, ["Lighthouse", "Labs"]);
   });
 
-  it("returns \"Lighthouse\"", () => {
+  it("first element is \"Lighthouse\"", () => {
     assert(result[0], "Lighthouse");
   });
 
-  it("returns \"Labs\"", () => {
+  it("second element is \"Labs\"", () => {
     assert(result[1], "Labs");
-  });
-
-  it("returns \"Lighthouse Labs\"", () => {
-    assert(result[0] + " " + result[1], "Lighthouse Labs");
   });
 
   const result2 = tail(["Ignore", "1", 2, 568.3]);
