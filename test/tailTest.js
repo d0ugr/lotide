@@ -1,30 +1,49 @@
-const assertEqual = require("../assertEqual");
-const tail        = require("../tail");
+const assert          = require("chai").assert;
+const assertEqual     = require("../assertEqual");
+const tail            = require("../tail");
 
-console.log(tail([1, 2, 3]));
-console.log(tail([123]));
-console.log(tail([]));
+describe("#tail", () => {
 
-/*
-const result = tail(["Hello", "Lighthouse", "Labs"]);
-console.log(result);
-assertEqual(result, ["Lighthouse", "Labs"]); // => will always fail!
-*/
+  const words = ["Yo Yo", "Lighthouse", "Labs"];
+  tail(words);
+  it("returns \"Labs\"", () => {
+    assert.deepEqual(tail(words), ["Lighthouse", "Labs"]);
+  });
 
-// Test Case: Check the original array
-const words = ["Yo Yo", "Lighthouse", "Labs"];
-tail(words); // no need to capture the return value since we are not checking it
-assertEqual(words.length, 3); // original array should still have 3 elements!
+  const result = tail(["Hello", "Lighthouse", "Labs"]);
 
-// Test Case 1: Check the returned array elements
-const result = tail(["Hello", "Lighthouse", "Labs"]);
-assertEqual(result.length, 2); // ensure we get back two elements
-assertEqual(result[0], "Lighthouse"); // ensure first element is "Lighthouse"
-assertEqual(result[1], "Labs"); // ensure second element is "Labs"
-assertEqual(result[0] + " " + result[1], "Lighthouse Labs"); // ensure first element is "Lighthouse"
+  it("returns two elements", () => {
+    assert(result.length, 2);
+  });
 
-const result2 = tail(["Ignore", "1", 2, 568.3]);
-assertEqual(result2.length, 3); // ensure we get back two elements
-assertEqual(result2[0], "1"); // ensure first element is "Lighthouse"
-assertEqual(result2[1], 2); // ensure second element is "Labs"
-assertEqual(result2[2], 568.3); // ensure second element is "Labs"
+  it("returns \"Lighthouse\"", () => {
+    assert(result[0], "Lighthouse");
+  });
+
+  it("returns \"Labs\"", () => {
+    assert(result[1], "Labs");
+  });
+
+  it("returns \"Lighthouse Labs\"", () => {
+    assert(result[0] + " " + result[1], "Lighthouse Labs");
+  });
+
+  const result2 = tail(["Ignore", "1", 2, 568.3]);
+
+  it("returns three elements", () => {
+    assert(result2.length, 3);
+  });
+
+  it("first element is \"1\"", () => {
+    assert(result2[0], "1");
+  });
+
+  it("first element is 2", () => {
+    assert(result2[1], 2);
+  });
+
+  it("second element is 568.3", () => {
+    assert(result2[2], 568.3);
+  });
+
+});
