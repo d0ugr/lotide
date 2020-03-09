@@ -1,14 +1,3 @@
-const assertEqual = function(actual, expected) {
-
-  // +++ and --- used for fonts without emojis:
-  if (actual === expected) {
-    console.log(`✅✅✅ +++ Assertion Passed: ${actual} === ${expected}`);
-  } else {
-    console.log(`🛑🛑🛑 --- Assertion Failed: ${actual} !== ${expected}`);
-  }
-
-};
-
 const countLetters = function(inString) {
 
   let result = {};
@@ -25,11 +14,4 @@ const countLetters = function(inString) {
 
 };
 
-const testString = "lighthouse in the house";
-console.log(countLetters(testString));
-console.log(testString);
-
-console.log(countLetters(""));
-console.log(countLetters("123"));
-console.log(countLetters("123233"));
-console.log(countLetters("Word to Snuffy"));
+module.exports = countLetters;
