@@ -4,16 +4,14 @@ const tail            = require("../tail");
 
 describe("#tail", () => {
 
-  const words = ["Yo Yo", "Lighthouse", "Labs"];
-  tail(words);
-  it("returns \"Labs\"", () => {
-    assert.deepEqual(tail(words), ["Lighthouse", "Labs"]);
-  });
-
   const result = tail(["Hello", "Lighthouse", "Labs"]);
 
   it("returns two elements", () => {
     assert(result.length, 2);
+  });
+
+  it("returns [\"Lighthouse\", \"Labs\"]", () => {
+    assert.deepEqual(result, ["Lighthouse", "Labs"]);
   });
 
   it("returns \"Lighthouse\"", () => {
